@@ -1,0 +1,122 @@
+﻿
+<div [@routerTransition]>
+    <div class="panel__top">
+        <div class="panel__basic-actions"></div>    <div class="panel__devices"></div>
+        <div class="panel__switcher"></div>
+        
+    </div>
+  <div class="editor-row">
+  <div class="editor-canvas">
+    <div id="gjs"></div>
+    <div class="stamp_editor card mt-3 p-3">
+        
+
+      <tabset class="mb-3" *ngIf="!isAdminUser">
+        <div class="my-3">
+          <button type="button" class="btn btn-primary" (click)="saveJSON()">
+            Update Stamp Data
+          </button>
+        </div>
+        <tab heading="Content">
+
+          <ng-container *ngTemplateOutlet="contentTemplate">
+          </ng-container>
+        </tab>
+        <tab heading="Reward">
+          <ng-container *ngTemplateOutlet="contentReward">
+
+          </ng-container>
+        </tab>
+      </tabset>
+    </div>
+</div>
+  <div class="panel__right">
+    <div class="layers-container"></div>
+    <div class="styles-container"></div>
+    <div class="traits-container"></div>    
+    <div class="blocks-container"></div>
+  </div>
+</div>
+
+
+<ng-template #contentTemplate>
+  <div class="container-fluid px-0 pt-2">
+    <div class="my-3">
+      <label class="form-label" for="StampEvent_PublicName">{{
+        l("PublicName")
+      }}</label>
+      <input
+        pInputText
+        type="text"
+        #StampEvent_PublicName="ngModel"
+        id="StampEvent_PublicName"
+        [(ngModel)]="stampEvent.publicName"
+        name="PublicName"
+        minlength="3"
+        maxlength="50"
+      />
+    </div>
+    <div class="my-3">
+      <label class="form-label" for="StampEvent_PublicDescription">{{
+        l("PublicDescription")
+      }}</label>
+      <ngx-jodit
+        [options]="joditOptions"
+        #StampEvent_PublicDescription="ngModel"
+        id="StampEvent_PublicDescription"
+        name="PublicDescription"
+        [(ngModel)]="stampEvent.publicDescription"
+      ></ngx-jodit>
+
+    </div>
+
+    <div class="my-3">
+      <label class="form-label" for="StampEvent_EventStartDate">{{
+        l("EventStartDate")
+      }}</label>
+      <p-calendar
+        #StampEvent_EventStartDate="ngModel"
+        name="EventStartDate"
+        [(ngModel)]="eventStartDate"
+        showButtonBar="true"
+        showIcon="true"
+        dateFormat="dd M yy"
+        [showTime]="true"
+        inputId="StampEvent_EventStartDate"
+      >
+      </p-calendar>
+
+    </div>
+    <div class="my-3">
+      <label class="form-label" for="StampEvent_EventEndDate">{{
+        l("EventEndDate")
+      }}</label>
+      <p-calendar
+        #StampEvent_EventEndDate="ngModel"
+        name="EventEndDate"
+        [(ngModel)]="eventEndDate"
+        showButtonBar="true"
+        showIcon="true"
+        dateFormat="dd M yy"
+        [showTime]="true"
+        inputId="StampEvent_EventEndDate"
+      >
+      </p-calendar>
+
+    </div>
+    <div class="my-3">
+      <label for="backgroundImageFile">Upload Background Image</label>
+      <input 
+      type="file" 
+      class="form-control" 
+      id="backgroundImageFile" 
+      accept="image/*"
+      (change)="onBackgroundImageSelected($event)">
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentReward>
+
+  </ng-template>
+
